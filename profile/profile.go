@@ -224,6 +224,14 @@ func ParseUncompressed(data []byte) (*Profile, error) {
 	return p, nil
 }
 
+func (p *Profile) GetStringTable() []string {
+	return p.stringTable
+}
+
+func (p *Profile) SetStringTable(table []string) {
+	p.stringTable = table
+}
+
 var libRx = regexp.MustCompile(`([.]so$|[.]so[._][0-9]+)`)
 
 // massageMappings applies heuristic-based changes to the profile
