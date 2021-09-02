@@ -53,6 +53,10 @@ type message interface {
 	encode(*buffer)
 }
 
+func Marshal(m message) []byte {
+	return marshal(m)
+}
+
 func marshal(m message) []byte {
 	var b buffer
 	m.encode(&b)
@@ -171,6 +175,10 @@ func encodeMessage(b *buffer, tag int, m message) {
 	copy(b.tmp[:], b.data[n2:n3])
 	copy(b.data[n1+(n3-n2):], b.data[n1:n2])
 	copy(b.data[n1:], b.tmp[:n3-n2])
+}
+
+func Unmarshal(data []byte, m message) (err error) {
+	return unmarshal(data,m)
 }
 
 func unmarshal(data []byte, m message) (err error) {
